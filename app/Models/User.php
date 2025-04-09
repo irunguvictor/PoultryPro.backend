@@ -14,7 +14,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'profile_picture', // added for file uploads
+        
     ];
 
     protected $hidden = [

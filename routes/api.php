@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\StockController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FeedController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // Authentication Routes (Protected)
 Route::post('/register', [AuthController::class, 'register']);
@@ -23,3 +24,8 @@ Route::apiResources([
     'egg-details' => EggDetailController::class,
     'feeds' => FeedController::class,
 ], ['only' => ['index', 'store']]);
+
+
+Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
+    return $request->user();
+});
