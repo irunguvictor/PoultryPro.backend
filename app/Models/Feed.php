@@ -10,6 +10,13 @@ class Feed extends Model
     use HasFactory;
 
     protected $fillable = ['type', 'quantity', 'chickens_count', 'avg_weight', 'date'];
+
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }
 
 

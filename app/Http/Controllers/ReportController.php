@@ -1,15 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
     public function index()
     {
-        return Report::orderBy('report_date', 'desc')->get();
+        $reports = Auth::user()->reports()->latest('report_date')->get();
+        return response()->json($reports);
     }
 
     public function store(Request $request)
@@ -21,7 +22,8 @@ class ReportController extends Controller
             'net_profit' => 'required|numeric',
         ]);
 
-        return Report::create($data);
+        $report = Auth::user()->reports()->create($data);
+        return response()->json($report, 201);
     }
 }
 

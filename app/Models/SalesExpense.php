@@ -15,4 +15,11 @@ class SalesExpense extends Model
         'description',
         'amount',
     ];
+    
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }

@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\EggDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EggDetailController extends Controller
 {
     public function index()
     {
-        return EggDetail::orderBy('date', 'desc')->get();
+        // ✅ Use the correct relationship method
+        $eggDetails = Auth::user()->eggDetails()->latest()->get();
+
+        return response()->json($eggDetails);
     }
 
     public function store(Request $request)
@@ -23,6 +27,9 @@ class EggDetailController extends Controller
             'total_cash' => 'required|numeric',
         ]);
 
-        return EggDetail::create($data);
+        // ✅ Attach the new entry to the authenticated user
+        $eggDetail = Auth::user()->eggDetails()->create($data);
+
+        return response()->json($eggDetail, 201);
     }
 }

@@ -10,6 +10,7 @@ class CreateSalesExpensesTable extends Migration
     {
         Schema::create('sales_expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->enum('type', ['sale', 'expense']);
             $table->string('description');

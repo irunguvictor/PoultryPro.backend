@@ -3,12 +3,14 @@ namespace App\Http\Controllers;
 
 use App\Models\SalesExpense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SalesExpenseController extends Controller
 {
     public function index()
     {
-        return SalesExpense::orderBy('date', 'desc')->get();
+        $expenses = Auth::user()->salesExpenses()->latest('date')->get();
+        return response()->json($expenses);
     }
 
     public function store(Request $request)
@@ -20,7 +22,8 @@ class SalesExpenseController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        return SalesExpense::create($data);
+        $expense = Auth::user()->salesExpenses()->create($data);
+        return response()->json($expense, 201);
     }
 }
 

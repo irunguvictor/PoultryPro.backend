@@ -13,6 +13,7 @@ return new class extends Migration
 {
     Schema::create('feeds', function (Blueprint $table) {
         $table->id();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->string('type'); // Type of feed
         $table->decimal('quantity', 10, 2); // Quantity in KG
         $table->integer('chickens_count'); // Number of chickens

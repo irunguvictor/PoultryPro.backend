@@ -15,4 +15,11 @@ class Report extends Model
         'total_expenses',
         'net_profit',
     ];
+    
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }

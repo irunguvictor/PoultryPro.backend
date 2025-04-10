@@ -14,4 +14,11 @@ class Stock extends Model
         'item_name',
         'quantity',
     ];
+    
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }

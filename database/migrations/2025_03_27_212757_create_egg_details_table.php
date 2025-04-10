@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('egg_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->integer('opening_stock');
             $table->integer('production');

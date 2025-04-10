@@ -1,15 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\HealthLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HealthLogController extends Controller
 {
     public function index()
     {
-        return HealthLog::orderBy('date', 'desc')->get();
+        $logs = Auth::user()->healthLogs()->latest('date')->get();
+        return response()->json($logs);
     }
 
     public function store(Request $request)
@@ -20,7 +21,7 @@ class HealthLogController extends Controller
             'description' => 'required|string',
         ]);
 
-        return HealthLog::create($data);
+        $log = Auth::user()->healthLogs()->create($data);
+        return response()->json($log, 201);
     }
 }
-

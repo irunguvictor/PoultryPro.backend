@@ -17,4 +17,11 @@ class EggDetail extends Model
         'closing_stock',
         'total_cash',
     ];
+    
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
 }
