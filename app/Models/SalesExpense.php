@@ -11,15 +11,14 @@ class SalesExpense extends Model
 
     protected $fillable = [
         'date',
-        'type',
         'description',
         'amount',
+        'type',
     ];
-    
 
-public function user()
-{
-    return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
-}

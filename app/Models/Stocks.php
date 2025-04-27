@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
+class Stocks extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,7 @@ class Stock extends Model
         'date',
         'item_name',
         'quantity',
+        'user_id',
     ];
     
 

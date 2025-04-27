@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Stocks;
@@ -21,8 +22,9 @@ class StockController extends Controller
             'quantity' => 'required|integer',
         ]);
 
-        $stock = Auth::user()->stocks()->create($data);
+        $data['user_id'] = Auth::id();
+        $stock = Stocks::create($data);
+
         return response()->json($stock, 201);
     }
 }
-

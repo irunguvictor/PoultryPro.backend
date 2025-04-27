@@ -2,21 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Feed extends Model
-{
-    use HasFactory;
-
-    protected $fillable = ['type', 'quantity', 'chickens_count', 'avg_weight', 'date'];
-
-
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
-}
-
-
+class Feed extends Model {
+    protected $fillable = [
+      'date','chicken_count','per_chicken_kg','total_feed_kg','user_id'
+    ];
+    public function user() {
+      return $this->belongsTo(User::class);
+    }
+  }
+  

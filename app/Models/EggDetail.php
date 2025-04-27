@@ -11,17 +11,19 @@ class EggDetail extends Model
 
     protected $fillable = [
         'date',
+        'egg_price',
         'opening_stock',
         'production',
         'sales',
         'closing_stock',
-        'total_cash',
+        'revenue',
+        'user_id',
     ];
     
+    
 
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

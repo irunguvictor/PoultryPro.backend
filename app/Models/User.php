@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function stocks()
     {
-        return $this->hasMany(Stock::class);
+        return $this->hasMany(Stocks::class);
     }
 
     public function healthLogs()
@@ -49,18 +49,20 @@ class User extends Authenticatable
         return $this->hasMany(HealthLog::class);
     }
 
+    public function feeds()
+    {
+        return $this->hasMany(Feed::class);
+    }
     public function salesExpenses()
     {
         return $this->hasMany(SalesExpense::class);
     }
+    
 
     public function reports()
     {
         return $this->hasMany(Report::class);
     }
 
-    public function feeds()
-    {
-        return $this->hasMany(Feed::class);
-    }
+    
 }

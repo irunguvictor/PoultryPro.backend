@@ -1,30 +1,36 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\SalesExpense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SalesExpenseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $expenses = Auth::user()->salesExpenses()->latest('date')->get();
-        return response()->json($expenses);
+        Log::info('Authenticated user:', ['user' => $request->user()]);
+        $items = Auth::user()->salesExpenses()->latest('date')->get();
+        return response()->json($items);
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'date' => 'required|date',
-            'type' => 'required|string',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'amount' => 'required|numeric',
+            'type' => 'required|in:sale,expense'
         ]);
 
-        $expense = Auth::user()->salesExpenses()->create($data);
-        return response()->json($expense, 201);
+        Log::info('Authenticated user ID:', ['id' => Auth::id()]);
+        Log::info('Creating sales expense with:', $validated);
+
+        // Automatically attaches the user_id
+        $item = Auth::user()->salesExpenses()->create($validated);
+
+        return response()->json($item, 201);
     }
 }
-
-

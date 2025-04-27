@@ -7,30 +7,27 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     *
+     * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('egg_details', function (Blueprint $table) {
+        Schema::create('feeds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('date');
-            $table->decimal('egg_price', 8, 2);
-            $table->integer('opening_stock');
-            $table->integer('production');
-            $table->integer('sales');
-            $table->integer('closing_stock');
-            $table->decimal('revenue', 10, 2);
+            $table->integer('chicken_count');
+            $table->decimal('per_chicken_kg', 8, 2);
+            $table->decimal('total_feed_kg', 10, 2);
             $table->timestamps();
-        }); 
+        });
+        
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('egg_details');
+        Schema::dropIfExists('feeds');
     }
 };
